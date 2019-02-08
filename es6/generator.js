@@ -8,7 +8,7 @@ export function *gen(from,to) {
 	}
 }
 
-// локальная функция модуля
+// приватная функция модуля
 function getNumeral(number, discharge) {
 	return parseInt((number % discharge) / (discharge / 10))
 }
