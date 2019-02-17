@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-proposal-class-properties": "^7.3.3",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.13.0",
