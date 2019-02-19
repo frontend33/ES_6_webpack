@@ -4,7 +4,8 @@ let conf = {
 		// 	entry: './es6/Homework2.js',
 	// entry: './es6/lesson3.js',
 	// entry: './es6/lesson3/homework/lesson3.js',
-	entry: './es6/lesson4/scripts.js',
+	// entry: './es6/lesson4/scripts.js',
+	entry: './es6/lesson5/scripts.js',
 
 	output: {
 		path: path.resolve(__dirname, './js'),
@@ -14,6 +15,13 @@ let conf = {
 	// Выводит ошибки в браузере
 	devServer: {
 		overlay: true,
+		proxy: {
+			'/js-frontend-api/**' : {
+				target: 'http://localhost/',
+				secure: false,
+				changeOrigin: true
+			}
+		}
 	},
 	// Правила загрузки файлов в вебпаке
 	module: {

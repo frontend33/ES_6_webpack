@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Leaflet Image</title>
+
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
+
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+  #snap {position: absolute; bottom: 10px; left: 10px; z-index: 99;}
+</style>
+</head>
+<body>
+
+
+    <script src='http://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-image/v0.0.3/leaflet-image.js'></script>
+
+    <button id='snap'>Map Snapshot</button>
+    <div id='images' style='float: right;'></div>
+    <div id='map' style='width: 70%;'></div>
+
+    <script type="text/javascript">
+        var map = L.mapbox.map('map', 'faraday2.hi7p6kfl', {
+            center: [44.5, -73.2],
+            zoom: 12
+        });
+
+        document.getElementById('snap').addEventListener('click', function() {
+            leafletImage(map, doImage);
+        });
+
+        //var box2d = map.getBounds();
+
+        function doImage(err, canvas) {
+            var img = document.createElement('img');
+            var dimensions = map.getSize();
+            imgRatio = dimensions.x / dimensions.y;
+            img.width = 300;
+            img.height = 300 / imgRatio;
+            img.src = canvas.toDataURL();
+            document.getElementById('images').innerHTML = '';
+            document.getElementById('images').appendChild(img);
+        }
+    </script>
+
+
+</body>
+</html>
