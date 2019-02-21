@@ -5,7 +5,8 @@ let conf = {
 	// entry: './es6/lesson3.js',
 	// entry: './es6/lesson3/homework/lesson3.js',
 	// entry: './es6/lesson4/scripts.js',
-	entry: './es6/lesson5/scripts.js',
+	// entry: './es6/lesson5/scripts.js',
+	entry: './es6/lesson6/scripts.js',
 
 	output: {
 		path: path.resolve(__dirname, './js'),
