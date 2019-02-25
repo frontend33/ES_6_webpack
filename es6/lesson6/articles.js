@@ -2,11 +2,13 @@ import server from './server'
 
 
 export async function all() {
-    let response = await server.get('https://api.myjson.com/bins/xh52u')
+    // let response = await server.get('https://api.myjson.com/bins/xh52u')
+    let response = await server.get('/bins/xh52u')
+    // В функции server.interceptors.request.use указали headers теперь он не нужен
+    // headers: {
+    //     Autorization: '50537266ded1d3eb1e6923f7f4b2f484';
+    // }
     console.log(response)
-    headers: {
-        Autorization: '50537266ded1d3eb1e6923f7f4b2f484';
-    }
     return response.data
 }
 
