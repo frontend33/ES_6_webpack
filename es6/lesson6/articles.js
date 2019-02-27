@@ -13,17 +13,18 @@ export async function all() {
 }
 
 export async function one(id){
-    let data = await makeRequest(`/js-hw-api/articles.php?id=${id}`);
-    console.log(data)
-    return data;
+    let response = await server.get(`https://api.myjson.com/bins/xh52u`, {
+        params: {id}
+    });
+    return response.data;
 }
 
-export async function remove(id){
-    let data = await makeRequest(`/js-hw-api/articles.php?id=${id}`, {
-        method: 'DELETE'
+export async function remove(id) {
+    let response = await server.delete('articles.php', {
+        params: {id}
     });
 
-    return data;
+    return response.data;
 }
 
 export async function add(article){
@@ -32,52 +33,37 @@ export async function add(article){
     for(let name in article){
         formData.append(name, article[name]);
     }
-
-    let data = await makeRequest('/js-hw-api/articles.php', {
-        method: 'POST',
-        body: formData
-    });
-
-    return data;
+    // Вторым параметром указываем объект который хотим заслать на сервер
+    let response = await server.post('articles.php', formData);
+    return response.data;
 }
 
-export async function edit(id, article){
-    let forServer = {
-        ...article,
-        id
-    };
-
-    let data = await makeRequest('/js-hw-api/articles.php', {
-        method: 'PUT',
-        body: JSON.stringify(forServer)
-    });
-
-    return data;
+export async function edit(id, article) {
+    // let forServer = {
+    //     ...article,
+    //     id
+    // };
+    let response = await server.put('articles.php', {...articl, id});
+    return response.data;
 }
 
-function makeRequest(url, options = {}){
-    if(!('headers' in options)){
-        options.headers = {};
-    }
+// Это делают интерцеторы проверку на ошибки и т д в server js - interceptors
+// function makeRequest(url, options = {}){
+//     if(!('headers' in options)){
+//         options.headers = {};
+//     }
 
-    // options.headers.Autorization = '50537266ded1d3eb1e6923f7f4b2f484';
-    options.headers.Autorization = '50537266ded1d3eb1e6923f7f4b2f484';
+//     // options.headers.Autorization = '50537266ded1d3eb1e6923f7f4b2f484';
+//     options.headers.Autorization = '50537266ded1d3eb1e6923f7f4b2f484';
 
-    return fetch(url, options).then((response) => {
-        if(response.status !== 200){
-            return response.text().then((text) => {
-                throw new Error(text);
-            })
-        }
+//     return fetch(url, options).then((response) => {
+//         if(response.status !== 200){
+//             return response.text().then((text) => {
+//                 throw new Error(text);
+//             })
+//         }
 
-        return response.json();
-    });
-}
+//         return response.json();
+//     });
+// }
 
-/*
-    GET articles.php -> все статьи в виде массива
-    GET articles.php?id=int -> одна статья в виде объекта || 404
-    POST articles.php body-formData(title, content) -> id || validation errors
-    DELETE articles.php?id=int  -> true || false
-    PUT articles.php body-json -> true || false
-*/

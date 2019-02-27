@@ -24,6 +24,9 @@ server.interceptors.request.use(function(request) {
 
 
 server.interceptors.response.use(function(response) {
+	/*if(typeof response.data !== "object"){
+        throw new Error("server did not send json");
+    }*/
 	console.log(response)
 	return response
 })
