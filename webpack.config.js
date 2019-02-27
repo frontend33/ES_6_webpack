@@ -6,7 +6,8 @@ let conf = {
 	// entry: './es6/lesson3/homework/lesson3.js',
 	// entry: './es6/lesson4/scripts.js',
 	// entry: './es6/lesson5/scripts.js',
-	entry: './es6/lesson6/scripts.js',
+	// entry: './es6/lesson6/scripts.js',
+	entry: './es6/lesson6-hw-done/index.js',
 
 	output: {
 		path: path.resolve(__dirname, './js'),
@@ -17,8 +18,8 @@ let conf = {
 	devServer: {
 		overlay: true,
 		proxy: {
-			'/js-frontend-api/**' : {
-				target: 'http://localhost/',
+			'/js-6-api/**': {
+				target: 'http://faceprog.ru/',
 				secure: false,
 				changeOrigin: true
 			}
